@@ -23,8 +23,9 @@ def load_and_preprocess_data(filepath):
     le_title = LabelEncoder()
     df['title'] = le_title.fit_transform(df['title'])
 
-    le_wishlist = LabelEncoder()
-    df['is_wishlisted'] = le_wishlist.fit_transform(df['is_wishlisted'])
+    # Convert boolean to int directly
+    df['is_wishlisted'] = df['is_wishlisted'].astype(int)
+    le_wishlist = None  # We don't need this anymore
 
     X = df.drop('rating', axis=1)
     y = df['rating']
